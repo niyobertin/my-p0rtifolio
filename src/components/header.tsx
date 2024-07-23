@@ -16,8 +16,8 @@ const NavigationBar = () =>{
                 <a className="hover:text-yellow-300" href="#home">Home</a>
                 <a className="hover:text-yellow-300" href="#service">Service</a>
                 <a className="hover:text-yellow-300" href="#portfolio">Portfolio</a>
+                <a className="hover:text-yellow-300" href="#skills">Skills</a>
                 <a className="hover:text-yellow-300" href="#blogs">Blogs</a>
-                <a className="hover:text-yellow-300" href="">Skills</a>
                 <a className="hover:text-yellow-300" href="">Contact us</a>
                 <a className="hover:text-yellow-300" href="">
                     <span><FaRegUser/></span>
@@ -34,8 +34,8 @@ const NavigationBar = () =>{
           <a className="block hover:text-yellow-300 mb-2" href="#home" onClick={closeMenu}>Home</a>
           <a className="block hover:text-yellow-300 mb-2" href="#service" onClick={closeMenu}>Service</a>
           <a className="block hover:text-yellow-300 mb-2" href="#portfolio" onClick={closeMenu}>Portfolio</a>
+          <a className="block hover:text-yellow-300 mb-2" href="#skills" onClick={closeMenu}>Skills</a>
           <a className="block hover:text-yellow-300 mb-2" href="#blogs" onClick={closeMenu}>Blogs</a>
-          <a className="block hover:text-yellow-300 mb-2" href="" onClick={closeMenu}>Skills</a>
           <a className="block hover:text-yellow-300 mb-2" href="" onClick={closeMenu}>Contact us</a>
           <a className="block hover:text-yellow-300" href="">
             <span><FaRegUser/></span>
