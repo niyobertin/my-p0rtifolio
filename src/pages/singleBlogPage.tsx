@@ -14,7 +14,10 @@ import { fetchBlogLikes, likeBlog } from '../api/reducers/like';
 const SingleBlogPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch: AppDispatch = useDispatch();
-  const { singleBlog, status, error } = useSelector((state: RootState) => state.blog);
+
+  const { singleBlog, status, error } = useSelector((state: RootState) => state.blog);  
+  const [comment, setComments] = useState<string[]>([]);
+  const [likes, setLikes] = useState(0);
   const { comments, status: commentStatus } = useSelector((state: RootState) => state.comment);
   const { likeCount} = useSelector((state: RootState) => state.like);
   const [newComment, setNewComment] = useState({ visitor: '', comments: '' });
