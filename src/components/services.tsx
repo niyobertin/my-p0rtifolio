@@ -89,7 +89,7 @@ const handleNext = () => {
         >
           {services.map((item, index) => (
             <div key={index} className="w-1/3 flex-shrink-0">
-              <CartItem image={item.image} content={item.content} />
+              <CartItem _id ={''}  image={item.image} content={item.content} />
             </div>
           ))}
         </div>
@@ -112,7 +112,7 @@ const handleNext = () => {
      <div className="flex flex-col ">
         {services.map((item, index) => (
           <div key={index} className="mb-3 p-2">
-            <CartItem image={item.image} content={item.content} />
+            <CartItem _id ={''} image={item.image} content={item.content} />
           </div>
         ))}
       </div>
