@@ -1,9 +1,9 @@
 const Spinner = () => (
     <span className="inline-block dark:text-white">
       <svg
-        width="20"
-        height="20"
-        fill="currentColor "
+        width="30"
+        height="30"
+        fill="yellow "
         className="mr-2 animate-spin"
         viewBox="0 0 1792 1792"
         xmlns="http://www.w3.org/2000/svg"
