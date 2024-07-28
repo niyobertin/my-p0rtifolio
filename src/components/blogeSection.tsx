@@ -44,7 +44,7 @@ const truncateText = (text: string, length: number): string => {
         <div className='overflow-auto ml-[4%] mr-[4%]'>
           <h1 className='flex items-center text-yellow-300 font-bold text-xl justify-center pb-4' id='blogs'>BLOGS</h1>
           {status ==='loading' ? (
-            <div className='flex items-center justify-center'><Spinner/>loading ...</div>
+            <div className='flex items-center justify-center'><Spinner/>Loading ...</div>
           ) : (
        <div className="overflow-hidden ">
         <div
