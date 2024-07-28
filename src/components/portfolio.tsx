@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CartItem from './common/cart';
 import studentManagement from '../assets/Student-Information-Management-System.jpg';
 import schoolImage from '../assets/scholl.jpeg';
