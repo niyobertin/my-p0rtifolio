@@ -1,11 +1,11 @@
 import React from 'react';
-import Homepage from './pages/homepage';
+import AppRoutes from './routes/appRputes';
 import './App.css';
 
 function App() {
   return (
     <div>
-      <Homepage/>
+      <AppRoutes/>
     </div>
   );
 }

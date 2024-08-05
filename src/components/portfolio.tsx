@@ -45,7 +45,7 @@ const PortfolioSection: React.FC  = () =>{
           <div className="sm:flex hidden overflow-hidden gap-4  justfay-center items-center">
           {portfolios.map((item, index) => (
             <div key={index} className="w-1/4 flex-shrink-0 ">
-              <CartItem image={item.image} content={item.content} />
+              <CartItem _id={''} image={item.image} content={item.content} />
             </div>
           ))}
           <div className='transform rotate-90 text-2xl font-bold sm:flex hidden'>PORTFOLIOS</div>
@@ -54,7 +54,7 @@ const PortfolioSection: React.FC  = () =>{
      <div className="flex flex-col ">
         {portfolios.map((item, index) => (
           <div key={index} className="mb-3">
-            <CartItem image={item.image} content={item.content} />
+            <CartItem _id={''} image={item.image} content={item.content} />
           </div>
         ))}
       </div>

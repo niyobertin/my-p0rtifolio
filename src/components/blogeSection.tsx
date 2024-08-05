@@ -6,8 +6,10 @@ import { FaChevronLeft } from "react-icons/fa6";
 import { fetchBlogs } from '../api/reducers/blogs';
 import CartItem from './common/cart';
 import Spinner from './common/spinner';
+import { useNavigate } from 'react-router-dom';
 const BlogsSection: React.FC  = () =>{
     const dispatch: AppDispatch = useDispatch();
+    const navigate = useNavigate(); 
     const { blogs, status, error } = useSelector((state: RootState) => state.blogs);
     useEffect(() => {
         if (status === 'idle') {
@@ -39,6 +41,10 @@ const truncateText = (text: string, length: number): string => {
   return text.substring(0, length) + '...';
 };
 
+const handleClick = (id: string) => {
+  navigate(`/blogs/${id}`);
+};
+
     return(
     <div className="text-white w-[100vw] top-20 z-30 relative overflow-auto pt-10">
         <div className='overflow-auto ml-[4%] mr-[4%]'>
@@ -52,8 +58,9 @@ const truncateText = (text: string, length: number): string => {
           style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
         >
           {blogs.map((item, index) => (
-            <div key={index} className="w-1/3 flex-shrink-0">
-              <CartItem image={item.image} content={truncateText(stripHtmlTags(item.content), 200)} />
+            
+            <div key={index} className="w-1/3 flex-shrink-0" onClick={() => handleClick(item._id)}>
+              <CartItem _id = {item._id} image={item.image} content={truncateText(stripHtmlTags(item.content), 200) } />
             </div>
           ))}
         </div>
@@ -77,8 +84,8 @@ const truncateText = (text: string, length: number): string => {
      <div className="lg:hidden">
      <div className="flex flex-col ">
         {blogs.map((item, index) => (
-          <div key={index} className="mb-3 p-2">
-            <CartItem image={item.image} content={truncateText(stripHtmlTags(item.content), 200)} />
+          <div key={index} className="mb-3 p-2" onClick={() => handleClick(item._id)}>
+            <CartItem _id={item._id} image={item.image} content={truncateText(stripHtmlTags(item.content), 200)} />
           </div>
         ))}
       </div>
