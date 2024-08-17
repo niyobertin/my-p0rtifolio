@@ -4,13 +4,15 @@ import blogsSlice from './reducers/blogs';
 import  fetchSingleBlogSlice from './reducers/blogs';
 import commentSlice from './reducers/comments';
 import likeSlice from './reducers/like';
-
+import registerSlice from './reducers/authentication'
 const store = configureStore({
   reducer: {
     blogs: blogsSlice,
     blog:fetchSingleBlogSlice,
     comment:commentSlice,
     like:likeSlice,
+    register:registerSlice,
+    login:registerSlice,
   },
 });
 

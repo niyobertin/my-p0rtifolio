@@ -24,3 +24,26 @@ export interface Blog {
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
   }
+
+  export interface User{
+    _id:string;
+    username:string;
+    email:string;
+    password:string;
+  }
+
+  export interface UserState {
+    user: User[];
+    isLoading: boolean;
+    error: string | null;
+  }
+  export interface Login{
+    email:string;
+    password:string;
+  }
+
+  export interface LoginState {
+    user: User[];
+    loading: boolean;
+    error: string | null;
+  }
