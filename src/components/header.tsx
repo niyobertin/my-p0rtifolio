@@ -1,6 +1,6 @@
 import Hamburger from 'hamburger-react';
 import { useEffect, useState } from 'react';
-import  { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; 
 import { FaRegUser } from "react-icons/fa";
 import { JwtPayload } from 'jsonwebtoken';
 
@@ -30,7 +30,7 @@ const NavigationBar = () => {
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
     setIsLoggedIn(false);
-    window.location.href = '/';  // Redirect to home page after logout
+    window.location.href = '/';  
   };
 
   const closeMenu = () => {
@@ -38,29 +38,29 @@ const NavigationBar = () => {
   };
 
   return (
-    <div className="fixed flex w-full justify-between bg-[#1e1e1e] pt-5 pb-5 text-white z-50">
+    <div className="fixed flex w-full justify-between bg-[#1e1e1e]  pt-5 pb-5 text-white z-50">
       <div className="ml-[4%]">
         <h1 className='font-bold text-lg'>Niyonkuru<span className='text-yellow-200 font-bold text-lg'>.</span></h1>
       </div>
-      <div className="flex justify-between gap-7 items-center mr-[4%] hidden sm:flex">
+      <div className="flex justify-between gap-7 items-center mr-[4%] hidden sm:flex ">
         <a className="hover:text-yellow-300" href="#home">Home</a>
         <a className="hover:text-yellow-300" href="#service">Service</a>
         <a className="hover:text-yellow-300" href="#portfolio">Portfolio</a>
         <a className="hover:text-yellow-300" href="#skills">Skills</a>
         <a className="hover:text-yellow-300" href="#blogs">Blogs</a>
-        <a className="hover:text-yellow-300" href="">Contact us</a>
+        <a className="hover:text-yellow-300" href="/contacts">Contact us</a> {/* Update href here */}
         {isLoggedIn ? (
           <div className="relative">
             <span onClick={toggleDropdown} className='flex gap-2 items-center border-l-2 pl-2 cursor-pointer'>
               <FaRegUser size={30} className='bg-gray-200 p-1 rounded-full text-black' />
             </span>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-62 bg-white text-black rounded-md shadow-lg py-2">
-                <p className="block px-4 py-2 hover:bg-gray-200">{decoded?.email}</p>
-                {decoded?.role === "admin" ? (
+              <div className="absolute right-0 mt-2 w-62 bg-white text-black rounded-md shadow-lg py-2 z-50">
+                <p className="block px-4 py-2">{decoded?.email}</p>
+                {decoded?.role === "admin" && (
                   <a href="/dashboard" className="block px-4 py-2 hover:bg-gray-200" onClick={() => setDropdownOpen(false)}>My Dashboard</a>
-                ):""}
-                <button className="block px-4 py-2 hover:bg-gray-200" onClick={handleLogout}>Logout</button> 
+                )}
+                <button className="block px-4 py-2 hover:bg-gray-200" onClick={handleLogout}>Logout</button>
               </div>
             )}
           </div>
@@ -88,9 +88,9 @@ const NavigationBar = () => {
         <a className="block hover:text-yellow-300 mb-2" href="#portfolio" onClick={closeMenu}>Portfolio</a>
         <a className="block hover:text-yellow-300 mb-2" href="#skills" onClick={closeMenu}>Skills</a>
         <a className="block hover:text-yellow-300 mb-2" href="#blogs" onClick={closeMenu}>Blogs</a>
-        <a className="block hover:text-yellow-300 mb-2" href="" onClick={closeMenu}>Contact us</a>
+        <a className="block hover:text-yellow-300 mb-2" href="#contact" onClick={closeMenu}>Contact us</a> {/* Update href here */}
         {isLoggedIn ? (
-          <span className='flex gap-2 items-center border-l-2 pl-2'>
+          <span className='flex gap-2 items-center border-l-2 pl-2 cursor-pointer' onClick={toggleDropdown}>
             <FaRegUser size={30} className='bg-gray-200 p-1 rounded-full text-black' />
           </span>
         ) : (

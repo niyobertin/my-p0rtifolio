@@ -47,3 +47,15 @@ export interface Blog {
     loading: boolean;
     error: string | null;
   }
+
+
+  export interface ContactorDetails {
+    _id:string;
+    visitor:string;
+    message:String;
+  }
+  export interface ContactState {
+    messages: ContactorDetails[];
+    loading: boolean;
+    error: string | null;
+  }
