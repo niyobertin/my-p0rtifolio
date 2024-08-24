@@ -26,7 +26,6 @@ export const fetchComments = createAsyncThunk<Comment[], string, { rejectValue: 
       }
     }
   );
-
   const initialState: CommentState = {
     comments:[],
     status: 'idle',
@@ -50,6 +49,7 @@ export const fetchComments = createAsyncThunk<Comment[], string, { rejectValue: 
           state.status = 'failed';
           state.error = action.payload || null;
         })
+
         .addCase(addComment.pending, (state) => {
           state.status = 'loading';
         })
@@ -61,6 +61,7 @@ export const fetchComments = createAsyncThunk<Comment[], string, { rejectValue: 
           state.status = 'failed';
           state.error = action.payload || null;
         });
+
     },
 });
 

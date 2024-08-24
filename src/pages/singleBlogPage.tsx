@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -21,6 +22,7 @@ const SingleBlogPage: React.FC = () => {
   useEffect(() => {
     if (id) {
       dispatch(fetchSingleBlog(id));
+
       dispatch(fetchComments(id));
       dispatch(fetchBlogLikes(id));
     }
@@ -32,6 +34,7 @@ const SingleBlogPage: React.FC = () => {
         <Spinner />Loading ...
       </div>
     );
+
   }
 
   const stripHtmlTags = (html: string): string => {
@@ -39,6 +42,7 @@ const SingleBlogPage: React.FC = () => {
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || '';
   };
+
 
   const handleCommentSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -61,6 +65,7 @@ const SingleBlogPage: React.FC = () => {
     }
   };
 
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -68,6 +73,7 @@ const SingleBlogPage: React.FC = () => {
   if (!singleBlog) {
     return <div>No blog found.</div>;
   }
+
 
   return (
     <div>
@@ -131,6 +137,7 @@ const SingleBlogPage: React.FC = () => {
           </button>
         </form>
       </div>
+
     </div>
   );
 };

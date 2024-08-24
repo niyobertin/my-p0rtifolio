@@ -6,6 +6,9 @@ import commentSlice from './reducers/comments';
 import likeSlice from './reducers/like';
 import registerSlice from './reducers/authentication'
 import querrySlice from './reducers/contact.us'
+
+
+
 const store = configureStore({
   reducer: {
     blogs: blogsSlice,

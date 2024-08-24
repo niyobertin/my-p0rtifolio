@@ -23,6 +23,7 @@ export interface Blog {
     comments: Comment[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
+
   }
 
   export interface User{
@@ -58,4 +59,5 @@ export interface Blog {
     messages: ContactorDetails[];
     loading: boolean;
     error: string | null;
+
   }
