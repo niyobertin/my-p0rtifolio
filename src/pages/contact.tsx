@@ -53,12 +53,12 @@ const ContactUs = () => {
                 <h1 className="text-white font-medium text-[36px]">
                     Contact Us
                 </h1>
-                <h5 className="pt-6 text-left text-white">Enter your query below</h5>
+                <h5 className="pt-6 text-left text-white">Provide you name and message bellow</h5>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <InputField
                         name="visitor"
                         type="text"
-                        placeholder="Your Email"
+                        placeholder="eg: Joan Doe"
                         register={register}
                         error={errors.visitor?.message}
                     />

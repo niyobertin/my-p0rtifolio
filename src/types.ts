@@ -2,13 +2,14 @@
 export interface Blog {
     _id: string;
     title: string;
-    image:string;
+    image:File | null;
     content: string;
   }
   
   export interface BlogsState {
     blogs: Blog[];
     singleBlog: Blog | null;
+    deleteBloge:Blog | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
   }
