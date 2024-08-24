@@ -15,7 +15,17 @@ export const fetchComments = createAsyncThunk<Comment[], string, { rejectValue: 
     }
   );
 
-
+  export const addComment = createAsyncThunk<Comment, { id: string, comment: Omit<Comment, '_id'> }, { rejectValue: string }>(
+    'comments/addComment',
+    async ({ id, comment }, { rejectWithValue }) => {
+      try {
+        const response = await api.post(`/blogs/${id}/comments`, comment);
+        return response.data.comment;
+      } catch (error: any) {
+        return rejectWithValue(error.response?.data || 'An error occurred');
+      }
+    }
+  );
   const initialState: CommentState = {
     comments:[],
     status: 'idle',
@@ -39,6 +49,19 @@ export const fetchComments = createAsyncThunk<Comment[], string, { rejectValue: 
           state.status = 'failed';
           state.error = action.payload || null;
         })
+
+        .addCase(addComment.pending, (state) => {
+          state.status = 'loading';
+        })
+        .addCase(addComment.fulfilled, (state, action: PayloadAction<Comment>) => {
+          state.status = 'succeeded';
+          state.comments.push(action.payload);
+        })
+        .addCase(addComment.rejected, (state, action: PayloadAction<string | undefined>) => {
+          state.status = 'failed';
+          state.error = action.payload || null;
+        });
+
     },
 });
 
