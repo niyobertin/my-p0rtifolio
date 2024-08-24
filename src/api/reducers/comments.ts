@@ -26,6 +26,7 @@ export const fetchComments = createAsyncThunk<Comment[], string, { rejectValue: 
       }
     }
   );
+
   const initialState: CommentState = {
     comments:[],
     status: 'idle',
