@@ -11,6 +11,8 @@ import parse from 'html-react-parser';
 import { fetchComments, addComment } from '../api/reducers/comments';
 import { fetchBlogLikes, likeBlog } from '../api/reducers/like';
 
+type BlogImage = File | string | null;
+
 const SingleBlogPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch: AppDispatch = useDispatch();
@@ -77,6 +79,10 @@ const SingleBlogPage: React.FC = () => {
     return <div>No blog found.</div>;
   }
 
+  const getImageUrl = (image: BlogImage): string => {
+    if (typeof image === 'string') return image;
+    return ''; 
+  };
 
   return (
     <div>
@@ -93,7 +99,7 @@ const SingleBlogPage: React.FC = () => {
         <h1 className="text-2xl font-bold text-white pt-4 pb-4 text-center text-yellow-300">
           {stripHtmlTags(singleBlog.title)}
         </h1>
-        <img src={singleBlog.image} alt="blog" className='rounded-md sm:w-[60%] w-[100%] object-cover float-left p-4' />
+        <img src={getImageUrl(singleBlog.image)} alt="blog" className='rounded-md sm:w-[60%] w-[100%] object-cover float-left p-4' />
         <div className='text-white pt-0'>{parse(singleBlog.content)}</div>
 
         <div className="flex items-center space-x-4 mt-4">

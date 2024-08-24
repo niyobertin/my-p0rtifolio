@@ -48,7 +48,7 @@ const NavigationBar = () => {
         <a className="hover:text-yellow-300" href="#portfolio">Portfolio</a>
         <a className="hover:text-yellow-300" href="#skills">Skills</a>
         <a className="hover:text-yellow-300" href="#blogs">Blogs</a>
-        <a className="hover:text-yellow-300" href="/contacts">Contact us</a> {/* Update href here */}
+        <a className="hover:text-yellow-300" href="/contacts">Contact us</a> 
         {isLoggedIn ? (
           <div className="relative">
             <span onClick={toggleDropdown} className='flex gap-2 items-center border-l-2 pl-2 cursor-pointer'>
@@ -88,11 +88,23 @@ const NavigationBar = () => {
         <a className="block hover:text-yellow-300 mb-2" href="#portfolio" onClick={closeMenu}>Portfolio</a>
         <a className="block hover:text-yellow-300 mb-2" href="#skills" onClick={closeMenu}>Skills</a>
         <a className="block hover:text-yellow-300 mb-2" href="#blogs" onClick={closeMenu}>Blogs</a>
-        <a className="block hover:text-yellow-300 mb-2" href="#contact" onClick={closeMenu}>Contact us</a> {/* Update href here */}
+        <a className="block hover:text-yellow-300 mb-2" href="/contacts" onClick={closeMenu}>Contact us</a> 
         {isLoggedIn ? (
-          <span className='flex gap-2 items-center border-l-2 pl-2 cursor-pointer' onClick={toggleDropdown}>
-            <FaRegUser size={30} className='bg-gray-200 p-1 rounded-full text-black' />
-          </span>
+          <div className="relative">
+            <span onClick={toggleDropdown} className='flex gap-2 items-center border-l-2 pl-2 cursor-pointer'>
+              <FaRegUser size={30} className='bg-gray-200 p-1 rounded-full text-black' />
+            </span>
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-62 bg-white text-black rounded-md shadow-lg py-2 z-50">
+                <p className="block px-4 py-2">{decoded?.email}</p>
+                {decoded?.role === "admin" && (
+                  <a href="/dashboard" className="block px-4 py-2 hover:bg-gray-200" onClick={() => setDropdownOpen(false)}>My Dashboard</a>
+                )}
+                <button className="block px-4 py-2 hover:bg-gray-200" onClick={handleLogout}>Logout</button>
+              </div>
+            )}
+          </div>
+          
         ) : (
           <span className='flex gap-4'>
             <a href="/register">
