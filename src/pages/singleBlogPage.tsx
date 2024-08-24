@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -11,25 +10,45 @@ import parse from 'html-react-parser';
 import { fetchComments, addComment } from '../api/reducers/comments';
 import { fetchBlogLikes, likeBlog } from '../api/reducers/like';
 
+type BlogImage = File | string | null;
+
 const SingleBlogPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch: AppDispatch = useDispatch();
 
   const { singleBlog, status, error } = useSelector((state: RootState) => state.blog);  
-  const [comment, setComments] = useState<string[]>([]);
-  const [likes, setLikes] = useState(0);
   const { comments, status: commentStatus } = useSelector((state: RootState) => state.comment);
-  const { likeCount} = useSelector((state: RootState) => state.like);
+  const { likeCount } = useSelector((state: RootState) => state.like);
   const [newComment, setNewComment] = useState({ visitor: '', comments: '' });
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchSingleBlog(id));
-
       dispatch(fetchComments(id));
       dispatch(fetchBlogLikes(id));
+      const likedBlogs = JSON.parse(localStorage.getItem('likedBlogs') || '{}');
+      if (likedBlogs[id]) {
+        setIsLiked(true);
+      }
     }
   }, [id, dispatch]);
+
+  const handleLike = async () => {
+    if (id) {
+      await dispatch(likeBlog(id));
+      dispatch(fetchBlogLikes(id));
+
+      const likedBlogs = JSON.parse(localStorage.getItem('likedBlogs') || '{}');
+      if (isLiked) {
+        delete likedBlogs[id]; 
+      } else {
+        likedBlogs[id] = true; 
+      }
+      localStorage.setItem('likedBlogs', JSON.stringify(likedBlogs));
+      setIsLiked(!isLiked);
+    }
+  };
 
   if (status === 'loading') {
     return (
@@ -37,7 +56,6 @@ const SingleBlogPage: React.FC = () => {
         <Spinner />Loading ...
       </div>
     );
-
   }
 
   const stripHtmlTags = (html: string): string => {
@@ -45,7 +63,6 @@ const SingleBlogPage: React.FC = () => {
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || '';
   };
-
 
   const handleCommentSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -61,14 +78,6 @@ const SingleBlogPage: React.FC = () => {
     setNewComment({ ...newComment, [name]: value });
   };
 
-  const handleLike = async () => {
-    if (id) {
-      await dispatch(likeBlog(id));
-      dispatch(fetchBlogLikes(id)); 
-    }
-  };
-
-
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -77,6 +86,10 @@ const SingleBlogPage: React.FC = () => {
     return <div>No blog found.</div>;
   }
 
+  const getImageUrl = (image: BlogImage): string => {
+    if (typeof image === 'string') return image;
+    return ''; 
+  };
 
   return (
     <div>
@@ -89,18 +102,21 @@ const SingleBlogPage: React.FC = () => {
           </Link>
         </span>
       </div>
-      <div className='p-12'>
-        <h1 className="text-2xl font-bold text-white pt-4 pb-4 text-center text-yellow-300">
+      <div className='sm:p-12 p-4 pt-12'>
+        <h1 className="sm:text-2xl text-lg font-bold text-white pt-4 pb-4 text-center text-yellow-300">
           {stripHtmlTags(singleBlog.title)}
         </h1>
-        <img src={singleBlog.image} alt="blog" className='rounded-md sm:w-[60%] w-[100%] object-cover float-left p-4' />
+        <img src={getImageUrl(singleBlog.image)} alt="blog" className='rounded-md sm:w-[60%] w-[100%] object-cover float-left sm:p-4 p-2' />
         <div className='text-white pt-0'>{parse(singleBlog.content)}</div>
 
         <div className="flex items-center space-x-4 mt-4">
-          <button onClick={handleLike} className="flex items-center text-yellow-300">
+          <button 
+            onClick={handleLike} 
+            className={`flex items-center ${isLiked ? 'text-yellow-300' : 'text-gray-300'}`}
+          >
             <FaThumbsUp className="mr-2" /> {likeCount}
           </button>
-          <div className="flex items-center text-yellow-300">
+          <div className="flex items-center text-gray-300">
             <FaComment className="mr-2" /> {comments.length}
           </div>
         </div>
@@ -140,7 +156,6 @@ const SingleBlogPage: React.FC = () => {
           </button>
         </form>
       </div>
-
     </div>
   );
 };

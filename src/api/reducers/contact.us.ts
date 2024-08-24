@@ -4,17 +4,23 @@ import { ContactorDetails,ContactState } from '../../types';
 import { AxiosError } from 'axios';
 
 
-// export const fetchComments = createAsyncThunk<Comment[], string, { rejectValue: string }>(
-//     'comments/fetchComments',
-//     async (id, { rejectWithValue }) => {
-//       try {
-//         const response = await api.get(`/blogs/${id}/comments`);
-//         return response.data.comments;
-//       } catch (error: any) {
-//         return rejectWithValue(error.response?.data || 'An error occurred');
-//       }
-//     }
-//   );
+export const fetchQuerries = createAsyncThunk<ContactorDetails[], void, { rejectValue: string }>(
+    'comments/fetchQuerries',
+    async (id, { rejectWithValue }) => {
+      try {
+        const response = await api.get('/querries',{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`, 
+          },
+        });
+        return response.data.querries;
+      } catch (error: any) {
+        return rejectWithValue(error.response?.data || 'An error occurred');
+      }
+    }
+  );
+
+
 
 export const sendMessage = createAsyncThunk<ContactorDetails, ContactorDetails, { rejectValue: string }>(
   'users/register',
@@ -33,6 +39,21 @@ export const sendMessage = createAsyncThunk<ContactorDetails, ContactorDetails, 
   }
 );
 
+export const deleteQuery = createAsyncThunk<ContactorDetails, string, { rejectValue: string }>(
+  'blogs/deleteQuery',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/querries/${id}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`, 
+          },
+      });
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data || 'An error occurred');
+    }
+  }
+);
 
   const initialState: ContactState = {
     messages:[],
@@ -46,17 +67,17 @@ export const sendMessage = createAsyncThunk<ContactorDetails, ContactorDetails, 
     reducers: {},
     extraReducers: (builder) => {
       builder
-        // .addCase(fetchComments.pending, (state) => {
-        //   state.status = 'loading';
-        // })
-        // .addCase(fetchComments.fulfilled, (state, action: PayloadAction<Comment[]>) => {
-        //   state.status = 'succeeded';
-        //   state.comments = action.payload;
-        // })
-        // .addCase(fetchComments.rejected, (state, action: PayloadAction<string | undefined>) => {
-        //   state.status = 'failed';
-        //   state.error = action.payload || null;
-        // })
+        .addCase(fetchQuerries.pending, (state) => {
+          state.loading = true;
+        })
+        .addCase(fetchQuerries.fulfilled, (state, action: PayloadAction<ContactorDetails[]>) => {
+          state.loading = false;
+          state.messages = action.payload;
+        })
+        .addCase(fetchQuerries.rejected, (state, action: PayloadAction<string | undefined>) => {
+          state.loading = false;
+          state.error = action.payload || null;
+        })
         .addCase(sendMessage.pending, (state) => {
           state.loading = true;
         })
@@ -68,7 +89,21 @@ export const sendMessage = createAsyncThunk<ContactorDetails, ContactorDetails, 
         .addCase(sendMessage.rejected, (state, action: PayloadAction<string | undefined>) => {
           state.loading = false;
           state.error = action.payload || null;
-        });
+        })
+
+        //delete single query
+        .addCase(deleteQuery.pending, (state) => {
+          state.loading = true;
+        })
+        .addCase(deleteQuery.fulfilled, (state, action: PayloadAction<ContactorDetails>) => {
+          state.loading = false;
+          state.messages.push(action.payload);
+        })
+        //@ts-ignore
+        .addCase(deleteQuery.rejected, (state, action: PayloadAction<string | undefined>) => {
+          state.loading = false;
+          state.error = action.payload || null;
+        })
     },
 });
 
