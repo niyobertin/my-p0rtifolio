@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const BlogsSection: React.FC  = () =>{
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate(); 
-    const { blogs, status, error } = useSelector((state: RootState) => state.blogs);
+    const { blogs, status} = useSelector((state: RootState) => state.blogs);
     useEffect(() => {
         if (status === 'idle') {
           dispatch(fetchBlogs());
@@ -59,7 +59,7 @@ const handleClick = (id: string) => {
         >
           {blogs.map((item, index) => (
             
-            <div key={index} className="w-1/3 flex-shrink-0" onClick={() => handleClick(item._id)}>
+            <div key={index} className="w-1/3 flex-shrink-0 cursor-pointer" onClick={() => handleClick(item._id)}>
               <CartItem _id = {item._id} image={item.image} content={truncateText(stripHtmlTags(item.content), 200) } />
             </div>
           ))}

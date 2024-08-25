@@ -2,17 +2,16 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import api from '../api';
 
 interface LikeState {
-  likeCount: number; // Number of likes for the single blog
+  likeCount: number; 
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
-// Thunk to like the blog
 export const likeBlog = createAsyncThunk<void, string, { rejectValue: string }>(
   'likes/likeBlog',
   async (blogId, { rejectWithValue }) => {
     try {
-      await api.post(`/blogs/${blogId}/likes`,{
+      await api.post(`/blogs/${blogId}/likes`, {},{
         headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`, 
           },
@@ -23,7 +22,6 @@ export const likeBlog = createAsyncThunk<void, string, { rejectValue: string }>(
   }
 );
 
-// Thunk to fetch the number of likes for the blog
 export const fetchBlogLikes = createAsyncThunk<number, string, { rejectValue: string }>(
   'likes/fetchBlogLikes',
   async (blogId, { rejectWithValue }) => {
