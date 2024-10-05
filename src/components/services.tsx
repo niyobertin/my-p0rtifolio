@@ -1,123 +1,127 @@
-import React, { useState } from 'react';
-import CartItem from './common/cart';
-import api from '../assets/api.jpeg';
-import ux from '../assets/ux.jpeg';
-import mobileApp from '../assets/mobileApp.jpg';
-import webDev from '../assets/web_development_Z62jy4k.jpg';
-import database from '../assets/databases.jpeg';
-import devOps from '../assets/dev ops.png';
-import { FaChevronRight } from "react-icons/fa";
-import { FaChevronLeft } from "react-icons/fa6";
-const ServiceSection: React.FC  = () =>{
+import React, { useEffect, useRef } from 'react';
+import service from '../assets/software-development.png';
+import { motion, useAnimation } from 'framer-motion';
 
-    const services = [{
-        image:ux,
-        content: (
-            <div>
-              <h3 className="text-lg font-semibold">UI/UX Design</h3>
-              <p className="white mt-4">Creating user-friendly and aesthetically pleasing interfaces and improving user experience.
-              </p>
-            </div>
-        )
-},
-{
-    image:webDev,
-    content: (
-        <div>
-          <h3 className="text-lg font-semibold">Web Development</h3>
-          <p className="white mt-4">Building and maintaining websites and web applications, including front-end and back-end development.
-          </p>
-        </div>
-    )
-},{
-    image:mobileApp,
-    content: (
-        <div>
-          <h3 className="text-lg font-semibold">Mobile App Development</h3>
-          <p className="white mt-4">Creating mobile applications for iOS and Android platforms.
-          </p>
-        </div>
-    )
-},{
-    image:api,
-    content: (
-        <div>
-          <h3 className="text-lg font-semibold">API Development and Integration</h3>
-          <p className="white mt-4">Designing and managing cloud-based solutions, including cloud migration, scaling, and cost optimization.
-          </p>
-        </div>
-    )
-},
-{
-    image:database,
-    content: (
-        <div>
-          <h3 className="text-lg font-semibold">Database Design and Management</h3>
-          <p className="white mt-4">Designing, implementing, and maintaining databases to ensure data integrity, security, and performance.
-          </p>
-        </div>
-    )
-},
-{
-    image:devOps,
-    content: (
-        <div>
-          <h3 className="text-lg font-semibold">DevOps Services</h3>
-          <p className="white mt-4">Implementing and managing continuous integration/continuous deployment (CI/CD) pipelines, cloud infrastructure, and automated testing.
-          </p>
-        </div>
-    )
-},]
+const ServiceSection: React.FC = () => {
+    const controlsServiceItem = useAnimation();
+    const sectionRef = useRef(null);
 
-const [currentIndex, setCurrentIndex] = useState(0);
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // Start the animation when the section comes into view
+                        controlsServiceItem.start({ opacity: 1, y: 0 });
+                    } else {
+                        // Optionally reverse the animation when leaving the view
+                        controlsServiceItem.start({ opacity: 0, y: 50 });
+                    }
+                });
+            },
+            {
+                threshold: 0.2, // Trigger when 20% of the section is in view
+            }
+        );
 
-const handlePrev = () => {
-  setCurrentIndex((prevIndex) => (prevIndex === 0 ? services.length - 1 : prevIndex - 1));
-};
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
 
-const handleNext = () => {
-  setCurrentIndex((prevIndex) => (prevIndex === services.length - 1 ? 0 : prevIndex + 1));
-};
-    return(
-    <div className="text-white w-[100vw] top-20 z-30 relative overflow-auto pt-10">
-        <div className='overflow-auto ml-[4%] mr-[4%]'>
-          <h1 className='flex items-center text-yellow-300 font-bold text-xl justify-center pb-4' id='service'>SERVICE</h1>
-          <div className="overflow-hidden ">
+        // Cleanup the observer when the component unmounts
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, [controlsServiceItem]);
+
+    const services = [
+        {
+            content: (
+                <div>
+                    <h3 className="text-lg font-semibold">UI/UX Design</h3>
+                    <p className="white mt-1">
+                        Creating user-friendly and aesthetically pleasing interfaces and improving user experience.
+                    </p>
+                </div>
+            )
+        },
+        {
+            content: (
+                <div>
+                    <h3 className="text-lg font-semibold">Web Development</h3>
+                    <p className="mt-1">
+                        Building and maintaining websites and web applications, including front-end and back-end development.
+                    </p>
+                </div>
+            )
+        },
+        {
+            content: (
+                <div>
+                    <h3 className="text-lg font-semibold">API Development and Integration</h3>
+                    <p className="mt-1">
+                        Designing and managing cloud-based solutions, including cloud migration, scaling, and cost optimization.
+                    </p>
+                </div>
+            )
+        },
+        {
+            content: (
+                <div>
+                    <h3 className="text-lg font-semibold">Database Design and Management</h3>
+                    <p className="mt-1">
+                        Designing, implementing, and maintaining databases to ensure data integrity, security, and performance.
+                    </p>
+                </div>
+            )
+        },
+        {
+            content: (
+                <div>
+                    <h3 className="text-lg font-semibold">DevOps Services</h3>
+                    <p className="mt-1">
+                        Implementing and managing continuous integration/continuous deployment (CI/CD) pipelines, cloud infrastructure, and automated testing.
+                    </p>
+                </div>
+            )
+        },
+    ];
+
+    return (
         <div
-          className="sm:flex hidden transition-transform duration-300 gap-4"
-          style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
+            ref={sectionRef} 
+            id="service-section"
+            className="text-black w-[100vw] top-20 z-30 relative pt-4"
         >
-          {services.map((item, index) => (
-            <div key={index} className="w-1/3 flex-shrink-0">
-              <CartItem _id ={''}  image={item.image} content={item.content} />
+            <h1 className="flex items-center text-black font-bold text-xl justify-center pb-4" id="service">
+                SERVICE
+            </h1>
+            <div className='flex gap-4'>
+                <div className='ml-[4%] sm:block hidden'>
+                    <img src={service} alt="service" />
+                </div>
+                <div className="mr-[4%]">
+
+                    {/* Grid Layout for Services */}
+                    <div className="grid">
+                        {services.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                className="p-2"
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={controlsServiceItem}
+                                transition={{ duration: 0.5, delay: index * 0.3 }}
+                            >
+                                {item.content}
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
             </div>
-          ))}
         </div>
-      </div>
-        </div>
-        <button
-        className="absolute top-1/2 left-16 transform -translate-y-1/2 bg-black opacity-25  px-4 py-4 rounded-full sm:flex hidden"
-        onClick={handlePrev}
-      >
-        <FaChevronLeft  className="text-white" />
-      </button>
-      <button
-        className="absolute top-1/2 right-16 transform -translate-y-1/2 bg-black opacity-25 px-4 py-4 rounded-full sm:flex hidden"
-        onClick={handleNext}
-      >
-        <FaChevronRight  className="text-white" />
-      </button>
-      {/* Mobile View */}
-     <div className="lg:hidden">
-     <div className="flex flex-col ">
-        {services.map((item, index) => (
-          <div key={index} className="mb-3 p-2">
-            <CartItem _id ={''} image={item.image} content={item.content} />
-          </div>
-        ))}
-      </div>
-     </div>
-    </div>
-)};
+    );
+};
 
 export default ServiceSection;

@@ -1,16 +1,17 @@
 
 body {
-  font-family: "Cambria", sans-serif;
+  font-family: Arial;
   margin: 0;
   padding: 0;
-  background-color: rgb(62, 61, 61);
-  color: #333;
+  /* background-color: rgb(62, 61, 61); */
+  color:black
 }
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
 
 
 @keyframes App-logo-spin {
