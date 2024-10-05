@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode'; 
 import { FaRegUser } from "react-icons/fa";
 import { JwtPayload } from 'jsonwebtoken';
+import profileImage from '../assets/onduty.jpeg'; // Background image
 
 interface CustomJwtPayload extends JwtPayload {
   email?: string;
@@ -13,6 +14,7 @@ const NavigationBar = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const loggedIn: any = localStorage.getItem('accessToken');
   let decoded = loggedIn ? jwtDecode(loggedIn) as CustomJwtPayload : null;
@@ -22,6 +24,21 @@ const NavigationBar = () => {
       setIsLoggedIn(true);
     }
   }, [loggedIn]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 555) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -38,7 +55,11 @@ const NavigationBar = () => {
   };
 
   return (
-    <div className="fixed flex w-full justify-between bg-[#1e1e1e]  pt-5 pb-5 text-white z-50">
+    <div 
+    className={`fixed flex items-center w-full justify-between pt-5 pb-5 text-white z-50 transition-all duration-300 ${
+      isScrolled ? "bg-black" : "bg-transparent"
+    }`}
+    >
       <div className="ml-[4%]">
         <h1 className='font-bold text-lg'>Niyonkuru<span className='text-yellow-200 font-bold text-lg'>.</span></h1>
       </div>
@@ -84,7 +105,7 @@ const NavigationBar = () => {
         }`}
       >
         <a className="block hover:text-yellow-300 mb-2" href="#home" onClick={closeMenu}>Home</a>
-        <a className="block hover:text-yellow-300 mb-2" href="#service" onClick={closeMenu}>Service</a>
+        <a className="hover:text-yellow-300" href="#service">Service</a>
         <a className="block hover:text-yellow-300 mb-2" href="#portfolio" onClick={closeMenu}>Portfolio</a>
         <a className="block hover:text-yellow-300 mb-2" href="#skills" onClick={closeMenu}>Skills</a>
         <a className="block hover:text-yellow-300 mb-2" href="#blogs" onClick={closeMenu}>Blogs</a>
@@ -104,7 +125,6 @@ const NavigationBar = () => {
               </div>
             )}
           </div>
-          
         ) : (
           <span className='flex gap-4'>
             <a href="/register">
