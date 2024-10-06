@@ -7,7 +7,7 @@ import { FaRegCopyright } from "react-icons/fa6";
 const Footer: React.FC  = () =>{
 
     return(
-    <div className="text-white w-[100vw] top-20 z-30 relative overflow-auto pt-10 bg-[#1e1e1e] mt-[3%]">
+    <div className="text-black w-[100vw] top-20 z-30 relative overflow-auto pt-10 bg-[#e0e7ff] mt-[3%]">
         <div className='overflow-auto ml-[4%] mr-[4%] '>
         <div className='sm:flex block justify-between pb-6'>
         <div>
@@ -22,10 +22,10 @@ const Footer: React.FC  = () =>{
         <div>
             <h1 className='font-bold pb-2'>Pages</h1>
             <ul>
-                <li><a className="hover:text-yellow-300" href="#home">Home</a></li>
-                <li><a className="hover:text-yellow-300" href="#service">Service</a></li>
-                <li><a className="hover:text-yellow-300" href="#portfolio">Portfolio</a></li>
-                <li><a className="hover:text-yellow-300" href="#skills">Skills</a></li>
+                <li><a className="hover:text-blue-500" href="#home">Home</a></li>
+                <li><a className="hover:text-blue-500" href="#service">Service</a></li>
+                <li><a className="hover:text-blue-500" href="#portfolio">Portfolio</a></li>
+                <li><a className="hover:text-blue-500" href="#skills">Skills</a></li>
             </ul>   
         </div>
         <div>
@@ -37,7 +37,9 @@ const Footer: React.FC  = () =>{
             </ul>
         </div>
     </div>
-    <p className='flex gap-2 items-center justify-center border-t-[1px] '><FaRegCopyright /> {new Date().getFullYear()} Niyonkuru Bertin. All rights reserved.</p>
+    <p className='flex gap-2 items-center justify-center border-t-[1px] border-black '>
+        <FaRegCopyright /> {new Date().getFullYear()} Niyonkuru Bertin. All rights reserved.
+        </p>
         </div>
     </div>
 )};

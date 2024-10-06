@@ -7,7 +7,6 @@ import InputField from '../components/common/input';
 import LinkPages from '../components/common/linkToPage';
 import LoginSchema from '../schema/loginSchema';
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import systemInt from '../assets/System-integration.jpg';
 import { yupResolver } from '@hookform/resolvers/yup'; 
 import { loginAsUSer } from '../api/reducers/authentication';
@@ -77,7 +76,7 @@ const Login = () => {
                     <div className="flex flex-col">
                         <button
                             type="submit"
-                            className="bg-[#161616] text-white py-3 my-4 text-[13px] md:text-lg rounded-sm"
+                            className="bg-[#0063b4] text-white py-3 my-4 text-[13px] md:text-lg rounded-sm"
                         >
                             {loading ? "Loading..." : "Login"}
                         </button>
@@ -88,7 +87,7 @@ const Login = () => {
                     link="/register"
                     text="Register"
                 /> 
-                <a href="/" className='text-green-300'>Back</a>
+                <a href="/" className='text-blue-500 font-bold'>Back</a>
             </div>
             <ToastContainer />
         </div>

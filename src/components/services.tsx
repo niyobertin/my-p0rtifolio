@@ -105,7 +105,7 @@ const ServiceSection: React.FC = () => {
                 <div className="mr-[4%]">
 
                     {/* Grid Layout for Services */}
-                    <div className="grid">
+                    <div className="grid bg-[#e0e7ff] p-3 rounded-[20px]">
                         {services.map((item, index) => (
                             <motion.div
                                 key={index}

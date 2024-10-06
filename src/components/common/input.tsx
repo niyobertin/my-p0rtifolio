@@ -21,7 +21,7 @@ const InputField: React.FC<InputFieldProps> = ({
 }) => (
   <div className="py-4">
     <input
-      className={`w-full border-b bg-transparent font-normal text-normal text-white py-1 border-transparent border-b-white outline-none ${className}`}
+      className={`w-full border-b bg-transparent font-normal text-normal text-black py-1 border-transparent border-b-black outline-none ${className}`}
       type={type}
       placeholder={placeholder}
       {...register(name)}
