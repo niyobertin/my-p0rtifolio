@@ -57,7 +57,7 @@ const NavigationBar = () => {
   return (
     <div 
     className={`fixed flex items-center w-full justify-between pt-5 pb-5 text-white z-50 transition-all duration-300 ${
-      isScrolled ? "bg-black" : "bg-transparent"
+      isScrolled ? "bg-[#0063b4]" : "bg-transparent"
     }`}
     >
       <div className="ml-[4%]">
@@ -100,7 +100,7 @@ const NavigationBar = () => {
         <Hamburger toggled={isOpen} toggle={setOpen} />
       </div>
       <div
-        className={`absolute top-16 w-[50%] right-[0%] bg-[#1e1e1e] text-white p-5 rounded shadow-lg transform transition-transform duration-300 ease-in-out ${
+        className={`absolute top-16 w-[50%] right-[0%] bg-[#0063b4] text-white p-5 rounded shadow-lg transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'scale-100 opacity-100' : 'scale-75 opacity-0'
         }`}
       >
