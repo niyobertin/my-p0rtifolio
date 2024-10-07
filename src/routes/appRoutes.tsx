@@ -23,6 +23,7 @@ const AppRoutes: React.FC = () => {
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/blogs' element={<BlogsList/>}/>
           <Route path='/add-blog' element={<NewBlogPage/>}/>
+          <Route path="/blogs/edit/:id" element={<NewBlogPage />} />
           <Route path='/Queries' element={<ParentComponent/>}/>
         </Routes>
       </Router>

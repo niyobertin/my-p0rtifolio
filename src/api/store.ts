@@ -2,6 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import blogsSlice from './reducers/blogs';
 import  deleteBlog  from './reducers/blogs';
+import  updateBlog  from './reducers/blogs';
 import  fetchSingleBlogSlice from './reducers/blogs';
 import commentSlice from './reducers/comments';
 import likeSlice from './reducers/like';
@@ -17,6 +18,7 @@ const store = configureStore({
     blogs: blogsSlice,
     blog:fetchSingleBlogSlice,
     deleteBloge:deleteBlog,
+    updateBloge:updateBlog,
     comment:commentSlice,
     like:likeSlice,
     register:registerSlice,

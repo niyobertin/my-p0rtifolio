@@ -4,11 +4,13 @@ import BlogsCart from "../components/common/blogsCart";
 import { AppDispatch, RootState } from "../api/store";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteBlog, fetchBlogs } from "../api/reducers/blogs";
-import Spinner from '../components/common/spinner';
+import SkeletonCard from '../components/common/sekleton/seletonCard';
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const BlogsList = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const { blogs, status, error } = useSelector((state: RootState) => state.blogs);
   const [deletingBlogId, setDeletingBlogId] = useState<string | null>(null);
   
@@ -46,18 +48,24 @@ const BlogsList = () => {
     dispatch(fetchBlogs());
   };
 
+  const handleEdit = (id: string) => {
+    navigate(`/blogs/edit/${id}`);
+  };
+
+
   return (
     <Layout>
       <div>
-        {status === 'loading' ? <Spinner /> :
+        {status === 'loading' ? <SkeletonCard /> :
           <div className="p-2 grid grid-cols-1 md:grid-cols-3 gap-8">
             {currentBlogs.map((item, index) => (
               <div key={index} className="flex-shrink-0">
                 <BlogsCart 
                   _id={item?._id} 
                   image={item?.image}
+                  title={item?.title}
                   content={truncateText(stripHtmlTags(item?.content), 200)} 
-                  onEdit={() => console.log("Edit function not implemented.")} 
+                  onEdit={() => handleEdit(item?._id)} 
                   onDelete={() => handleDelete(item?._id)} 
                   isDeleting={deletingBlogId === item?._id}
                 />
