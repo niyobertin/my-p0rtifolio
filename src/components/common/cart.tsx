@@ -22,17 +22,29 @@ const CartItem: React.FC<ServiceCartItemProps> = ({ image,title, content,onClick
   }, [image]);
 
   return (
-    <div className="relative text-black shadow-md rounded-lg p-4 flex flex-col justify-between h-auto">
+    <div className="relative bg-white text-black shadow-lg rounded-lg p-4 flex flex-col justify-between h-auto hover:shadow-2xl transition-shadow duration-300 ease-in-out">
       {/* Image */}
-      <img src={imageUrl} alt="Cart item" className="w-full h-36 object-container rounded-md mb-4" onClick={onClick} />
-
+      <div className="h-48 w-full flex items-center justify-center rounded-md overflow-hidden">
+        <img 
+          src={imageUrl} 
+          alt="Cart item" 
+          className="w-full h-full object-cover" 
+          onClick={onClick} 
+        />
+      </div>
+  
       {/* Content */}
-      <div className="flex-grow text-center text-fit">
-        <h1 className='font-bold text-xl' onClick={onClick}>{title}</h1>
-         <p onClick={onClick}> {content}</p>
+      <div className="flex-grow text-center mt-4">
+        <h1 className="font-bold text-lg text-gray-800 hover:text-blue-600 cursor-pointer transition-colors duration-300" onClick={onClick}>
+          {title}
+        </h1>
+        <p className="mt-2 text-gray-600 cursor-pointer hover:text-blue-500" onClick={onClick}>
+          {content}
+        </p>
       </div>
     </div>
   );
+  
 };
 
 export default CartItem;
