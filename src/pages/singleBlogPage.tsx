@@ -108,11 +108,11 @@ const SingleBlogPage: React.FC = () => {
           {stripHtmlTags(singleBlog.title)}
         </h1>
 
-        <div className="relative w-full sm:w-[90%] h-[30rem]  sm:mx-auto bg-cover bg-center">
+        <div className="relative w-full sm:w-[80%] h-[30rem]  sm:mx-auto bg-cover bg-center">
           <img 
             src={getImageUrl(singleBlog.image)} 
             alt="blog" 
-            className='rounded-md w-full h-full object-cover mb-4' 
+            className='rounded-md w-full h-full object-contain mb-4' 
           />
         </div>
 
