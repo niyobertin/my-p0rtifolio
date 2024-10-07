@@ -60,6 +60,23 @@ export const addBlog = createAsyncThunk<Blog, Partial<Blog>, { rejectValue: stri
   }
 );
 
+export const updateBlog = createAsyncThunk<Blog, { id: string; updatedBlog: Partial<Blog> }, { rejectValue: string }>(
+  'blogs/updateBlog',
+  async ({ id, updatedBlog }, { rejectWithValue }) => {
+    try {
+      const response = await api.patch(`/blogs/${id}`, updatedBlog, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      return response.data.blog;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data || 'An error occurred while updating the blog');
+    }
+  }
+);
+
 const initialState: BlogsState = {
   blogs: [],
   singleBlog: null,
@@ -118,6 +135,19 @@ const blogsSlice = createSlice({
         state.blogs.push(action.payload);
       })
       .addCase(addBlog.rejected, (state, action: PayloadAction<string | undefined>) => {
+        state.status = 'failed';
+        state.error = action.payload || null;
+      })
+
+      // Update Blog
+      .addCase(updateBlog.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateBlog.fulfilled, (state, action: PayloadAction<Blog>) => {
+        state.status = 'succeeded';
+        state.singleBlog = action.payload;
+      })
+      .addCase(updateBlog.rejected, (state, action: PayloadAction<string | undefined>) => {
         state.status = 'failed';
         state.error = action.payload || null;
       });

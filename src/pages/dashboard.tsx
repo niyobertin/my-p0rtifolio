@@ -7,7 +7,6 @@ import { fetchBlogs } from "../api/reducers/blogs";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../api/store";
 import { fetchQuerries } from "../api/reducers/contact.us";
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../api/api";
 const Dashboard = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -76,15 +75,6 @@ const Dashboard = () => {
        )}
        />
 
-{/* <DashboardCartItem
-       contentNumber={12}
-       content ={(
-        <div className="center">
-            <p><FaUserGroup /></p>
-            <p>Users</p>
-        </div>
-       )}
-       /> */}
      </div>
 
      <div>

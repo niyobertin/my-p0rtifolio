@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from '../api/store';
 import Layout from '../components/common/layout';
 import { useDispatch } from 'react-redux';
 import { fetchQuerries, deleteQuery } from '../api/reducers/contact.us';
-import Spinner from '../components/common/spinner';
+import SkeletonSingleBlog from '../components/common/sekleton/singleBlogSekleton';
 import { toast, ToastContainer } from 'react-toastify';
 import { ContactorDetails } from '../types';
 
@@ -36,7 +36,7 @@ const ParentComponent: React.FC = () => {
   return (
     <Layout>
       {loading ? (
-        <Spinner />
+        <SkeletonSingleBlog />
       ) : (
         <div>
           <h1 className="text-2xl font-bold text-black">Queries</h1>
