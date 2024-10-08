@@ -76,7 +76,7 @@ const HeroSection = () => {
                     animate={controlsDescription} 
                     transition={{ duration: 0.5, delay: 1 }} 
                 >
-                    I'm a Fullstack Software Engineer with a strong focus on JavaScript, specializing in 
+                    I'm a Full stack Developer with a strong focus on JavaScript, specializing in 
                     front-end development using React and Redux, and back-end development with Node.js and Express.js. 
                     I have experience building APIs, managing databases like MongoDB and PostgreSQL, and delivering responsive,
                     high-quality solutions. Passionate about creating seamless 
