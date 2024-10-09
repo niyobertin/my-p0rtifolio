@@ -24,7 +24,7 @@ const CartItem: React.FC<ServiceCartItemProps> = ({ image,title, content,onClick
   return (
     <div className="relative text-black shadow-md rounded-lg p-4 flex flex-col justify-between h-auto">
       {/* Image */}
-      <img src={imageUrl} alt="Cart item" className="w-full h-36 object-cover rounded-md mb-4" onClick={onClick} />
+      <img src={imageUrl} alt="Cart item" className="w-full h-36 object-container rounded-md mb-4" onClick={onClick} />
 
       {/* Content */}
       <div className="flex-grow text-center text-fit">
