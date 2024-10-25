@@ -41,7 +41,7 @@ const Dashboard = () => {
         };
 
       fetchUsers()
-    })  
+    },[])  
     return (
       <Layout>
      <div className="sm:flex p-4 gap-8 block sm:pt-24 pt-2 ">
