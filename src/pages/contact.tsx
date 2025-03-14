@@ -1,89 +1,101 @@
-import { AxiosError } from 'axios';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../api/store';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import InputField from '../components/common/input';
+import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import systemInt from '../assets/System-integration.jpg';
-import { yupResolver } from '@hookform/resolvers/yup'; 
-import ContactSchema from '../schema/contactSchema'; // Update schema import
-import { sendMessage } from '../api/reducers/contact.us';
-import { useNavigate } from 'react-router-dom';
 
-interface ContactForm {
-    visitor: string;
-    message: string;
-}
+const Contacts: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    message: "",
+  });
 
-const ContactUs = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const loading = useSelector((state: RootState) => state.querries.loading);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const {
-        register,
-        reset,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<ContactForm>({
-        resolver: yupResolver(ContactSchema),
-    });
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
 
-    const onSubmit: SubmitHandler<ContactForm> = async (data: ContactForm) => {
-        try {
-            // @ts-ignore
-            await dispatch(sendMessage(data)).unwrap();
-            toast.success("Message sent successfully!");
-            reset();
-        } catch (err) {
-            const error = err as AxiosError;
-            toast.error(`Failed to send message: ${error.message}`);
+    emailjs
+      .send(
+        "service_d82lumu",
+        "template_4zs1em7",
+        formData,
+        "kTNrnf3XAW7zBaYdf"
+      )
+      .then(
+        () => {
+          toast.success("Email sent successfully!");
+          setFormData({ name: "", phone: "", message: "" });
+        },
+        (error) => {
+          toast.error("Email sending failed:", error);
         }
-    };
+      );
+  };
 
-    return (
-        <div className="flex w-full max-h-screen overflow-y-hidden">
-            <div className="hidden min-h-screen lg:flex w-[50%] xl:w-[60%] items-center">
-                <img className="w-full min-h-screen object-cover" src={systemInt} alt="contactImage" />
+  return (
+    <>
+      <h1 className="text-White font-bold text-2xl text-center pt-20 pb-4">
+        Contact us
+      </h1>
+      <div className="sm:flex block gap-8 mb-6">
+        <div
+          className="bg-gray-800 text-white pt-[4%] pb-[2%] mr-[30%] ml-[30%] w-full text-lg rounded-[20px]"
+          id="contacts"
+        >
+          <form
+            onSubmit={sendEmail}
+            className="sm:ml-[2%] ml-[2%] sm:mr-[2%] mr-[2%]"
+          >
+            <div className="mt-2">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Name"
+                className="bg-gray-800 border-b-2 border-blue-500 w-full focus:outline-none"
+                required
+              />
             </div>
-            
-            <div className="w-[100%] md:w-[50%] xl:w-[40%] flex flex-col justify-center mt-[15vh] mx-auto px-16">
-                <h1 className="text-white font-medium text-[36px]">
-                    Contact Us
-                </h1>
-                <h5 className="pt-6 text-left text-white">Provide you name and message bellow</h5>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <InputField
-                        name="visitor"
-                        type="text"
-                        placeholder="eg: Joan Doe"
-                        register={register}
-                        error={errors.visitor?.message}
-                    />
-                    <div className="mt-4">
-                        <textarea
-                            placeholder="Your Message"
-                            {...register("message")}
-                            className={`form-textarea w-full h-32 p-2 bg-[#161616] text-white rounded-md ${errors.message ? 'border-red-500' : ''}`}
-                        />
-                        {errors.message && <p className="text-red-500">{}</p>}
-                    </div>
-                    <div className="flex flex-col">
-                        <button
-                            type="submit"
-                            className="bg-black text-white py-3 my-4 text-[13px] md:text-lg rounded-sm"
-                        >
-                            {loading ? "Sending..." : "Send Message"} 
-                        </button>
-                    </div>
-                </form>
-                <a href="/" className="text-green-300">Back</a>
+            <div className="mt-2">
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Phone number"
+                className="bg-gray-800 border-b-2 border-blue-500 w-full focus:outline-none"
+                required
+              />
             </div>
-            <ToastContainer />
+            <div className="mt-2">
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Message"
+                className="bg-gray-800 border-b-2 border-blue-500 w-full focus:outline-none"
+                required
+              ></textarea>
+            </div>
+            <div className="flex items-center justify-center mt-6">
+              <button
+                type="submit"
+                className="p-2 bg-blue-800 font-bold rounded-[30px] px-8"
+              >
+                Send
+              </button>
+            </div>
+          </form>
         </div>
-    );
+      </div>
+      <ToastContainer />
+    </>
+  );
 };
 
-export default ContactUs;
+export default Contacts;

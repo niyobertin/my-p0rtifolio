@@ -1,57 +1,103 @@
-import React from 'react';
-import customeWeb from '../assets/web-app-dev-banner@2x.png'
-const PortfolioSection: React.FC  = () =>{
+import React from "react";
+import profile from "../assets/profile.png";
+import ecomerce from "../assets/eagels.png";
+import devepulse from "../assets/devpurce.png";
+import nzamura from "../assets/nzamura.png";
+import villagetalks from "../assets/WhatsApp Image 2025-03-14 at 22.29.25.jpeg";
 
-    const portfolios = [{
-        content: (
-            <a href="https://nbertin-tech.vercel.app/">
-                <div>
-              <h3 className="text-lg font-semibold">My website </h3>
-              <p className="white mb-4">Here, I showcase the skills and services I offer in software development. Additionally, I maintain a blog where you can explore a variety of tech-related topics. Feel free to like or comment on any blog post after opening and reading its content. Your feedback is always appreciated!.
-              </p>
-            </div>
-            </a>
-        )
-},
-{
-    content: (
-     <a href="https://eagles-ec-fe-staging.vercel.app">   
-     <div>
-     <h3 className="text-lg font-semibold">E-commerce website</h3>
-     <p className="white mb-4">During the Andela Technical Leadership Program (ATLP), cohort 31, I collaborated with a team to build a dynamic e-commerce platform.
-     This platform enables users to browse and purchase products seamlessly, offering features like product listings, shopping carts, and secure checkout. Our goal was to provide a user-friendly shopping experience while ensuring backend efficiency and scalability.
-     </p>
-   </div></a>
-    )
-},{
-    content: (
-        <a href="https://beta.devpulse.org"><div>
-        <h3 className="text-lg font-semibold">DevPulse</h3>
-        <p className="white mb-4">Pulse is a platform designed to handle ratings for the companies in the Ed-tech industries with the its first paying customer being Andela. It is currently under development using modern web technologies that prioritize speed and security. This repo holds the codebase for the frontend part of the platform which uses Reactjs javascript framework for build modern UIs.
-        </p>
-      </div></a>
-    )
-},]
+const PortfolioSection: React.FC = () => {
+  const portfolios = [
+    {
+      title: "My profile",
+      description:
+        "Showcasing my skills and services in software development, along with a blog featuring tech-related topics.",
+      image: profile,
+      link: "https://nbertin-tech.vercel.app/",
+    },
+    {
+      title: "E-commerce Website",
+      description:
+        "Developed during ATLP Cohort 31, this platform enables users to browse and purchase products seamlessly.",
+      image: ecomerce,
+      link: "https://eagles-ec-fe-staging.vercel.app",
+    },
+    {
+      title: "DevPulse",
+      description:
+        "A rating platform for Ed-tech companies, initially designed for Andela, built with React.js and modern web technologies.",
+      image: devepulse,
+      link: "https://metron-devpulse.vercel.app",
+    },
+    {
+      title: "Nzamura",
+      description:
+        "This is a digital marketing platform which has developed with the aim of publishing product to connect product owner and clients",
+      image: nzamura,
+      link: "https://nzamura.vercel.app/",
+    },
+    {
+      title: "VillageTalks",
+      description:
+        "A mobile blogging mobile app. that help villagers to connect and share stories around.",
+      image: villagetalks,
+      link: "https://github.com/niyobertin/villageTalks",
+    },
+    {
+      title: "View more..",
+      description: "Visit my github account for more",
+      image:
+        "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+      link: "https://github.com/niyobertin",
+    },
+  ];
 
-    return(
-    <div className="text-black w-[100vw] top-20 z-30 relative overflow-auto pt-10">
-        <div className='overflow-auto ml-[4%] mr-[4%]'>
-          <h1 className='flex items-center text-black font-bold text-xl justify-center pb-4' id='portfolio'>PORTFOLIO</h1>
-       <div className='flex justify-between gap-10'>
-          <div className="bg-[#e0e7ff] p-3 rounded-[20px] sm:w-[50%] w-full">
-              {portfolios.map((item, index) => (
-                <div key={index} className="w-full">
-                  {item.content}
+  return (
+    <div className="text-white w-full top-20 z-30 relative overflow-auto pt-10">
+      <div className="overflow-auto mx-[4%]">
+        <h1
+          className="flex items-center text-white font-bold text-xl justify-center pb-8 pt-8"
+          id="portfolio"
+        >
+          PORTFOLIOS
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {portfolios.map((item, index) => (
+            <div
+              key={index}
+              className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all"
+            >
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative"
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-xl font-bold">
+                  {item.title}
                 </div>
-              ))}
-              <p className='p-3 text-center text-lg'>For more projects vist my github page <a href="https://github.com/niyobertin" className='text-blue-500 font-bold'>here...</a></p>
-          </div>
-          <div className='sm:block hidden'>
-            <img src={customeWeb} alt="portifolio" className='object-cover'/>
-          </div>
-       </div>
+              </a>
+              <div className="p-4">
+                <p className="text-white text-sm mb-2">{item.description}</p>
+                <div className="flex justify-between items-center">
+                  <a
+                    href={item.link}
+                    className="text-blue-500 font-bold"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  ></a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
-    </div>
-)};
+  );
+};
 
 export default PortfolioSection;

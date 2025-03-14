@@ -2,19 +2,21 @@ import NavigationBar from "./header";
 import HeroSection from "./heroSection";
 import ServiceSection from "./services";
 import PortfolioSection from "./portfolio";
-import BlogsSection from "./blogeSection";
 import SkillSection from "./skills";
 import Footer from "./footer";
-const LandingPage:React.FC = () => (
-    <div className="">
-        <NavigationBar/>
-        <HeroSection/>
-        <ServiceSection/>
-        <PortfolioSection/>
-        <SkillSection/>
-        <BlogsSection/>
-        <Footer/>
-    </div>
+import About from "./about";
+import Contacts from "../pages/contact";
+const LandingPage: React.FC = () => (
+  <div className="">
+    <NavigationBar />
+    <HeroSection />
+    <About />
+    <ServiceSection />
+    <PortfolioSection />
+    <SkillSection />
+    <Contacts />
+    <Footer />
+  </div>
 );
 
 export default LandingPage;
