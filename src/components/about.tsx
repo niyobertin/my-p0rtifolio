@@ -19,17 +19,24 @@ const About: React.FC = () => {
         />
         <div className="max-w-3xl shadow-lg rounded-2xl sm:p-8 p-2 flex flex-col items-center">
           <p className="text-white text-center leading-relaxed">
-            I'm a Full Stack Developer specializing in the MERN and PERN stacks.
-            I have extensive experience in frontend development using React,
-            Redux, TailwindCSS, and React Native with Expo, as well as backend
-            development with Node.js, Express.js, and Prisma ORM.
+            I am <b>Niyonkuru Bertin</b>, a passionate Full Stack Developer
+            specializing in JavaScript and TypeScript, with expertise in both
+            web and mobile development. I build scalable applications using
+            React, React Native, Redux, Tailwind CSS, and Sass for intuitive and
+            responsive user interfaces. On the backend, I design robust
+            architectures with Node.js, Express.js, GraphQL, MongoDB, and
+            PostgreSQL, implementing RESTful APIs, JWT authentication, real-time
+            features with Socket.io, and microservices communication using Kafka
+            to ensure seamless performance.
           </p>
           <p className="text-white text-center leading-relaxed mt-4">
-            I build scalable APIs, integrate real-time features (Socket.io), and
-            manage databases like MongoDB and PostgreSQL. My expertise also
-            includes Dockerized deployments, microservices architecture, and
-            Kafka-based event-driven systems. I'm passionate about creating
-            seamless user experiences and optimizing performance.
+            Beyond coding, I thrive in agile environments, collaborating with
+            teams to develop efficient, secure, and scalable solutions. I have
+            hands-on experience with Docker, GitHub Actions, CircleCI, and CI/CD
+            pipelines, ensuring smooth deployment workflows. Whether optimizing
+            system performance, building cross-platform mobile apps with React
+            Native, or integrating DevOps practices, I am always eager to tackle
+            new challenges and create impactful software solutions.
           </p>
           <p className="text-white text-center leading-relaxed mt-8">
             Connect with me{" "}
