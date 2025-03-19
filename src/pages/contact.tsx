@@ -37,15 +37,12 @@ const Contacts: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="justify-center" id="contacts">
       <h1 className="text-White font-bold text-2xl text-center pt-20 pb-4">
         Contact us
       </h1>
-      <div className="sm:flex block gap-8 mb-6">
-        <div
-          className="bg-gray-800 text-white pt-[4%] pb-[2%] mr-[30%] ml-[30%] w-full text-lg rounded-[20px]"
-          id="contacts"
-        >
+      <div className="mb-6 flex justify-center ">
+        <div className="bg-gray-800 text-white pt-[4%] pb-[2%]   w-full sm:w-[40%] text-lg sm:rounded-[20px] rounded-[0px] shadow-lg">
           <form
             onSubmit={sendEmail}
             className="sm:ml-[2%] ml-[2%] sm:mr-[2%] mr-[2%]"
@@ -94,7 +91,7 @@ const Contacts: React.FC = () => {
         </div>
       </div>
       <ToastContainer />
-    </>
+    </div>
   );
 };
 

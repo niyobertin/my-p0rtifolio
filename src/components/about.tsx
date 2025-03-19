@@ -5,12 +5,9 @@ import { BsTwitterX } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
 const About: React.FC = () => {
   return (
-    <div className="justify-center pt-6">
+    <div className="justify-center pt-24" id="about">
       <div>
-        <h1
-          className="flex items-center text-white font-bold text-xl justify-center pb-4"
-          id="about"
-        >
+        <h1 className="flex items-center text-white font-bold text-xl justify-center pb-4">
           ABOUT
         </h1>
       </div>
@@ -18,9 +15,9 @@ const About: React.FC = () => {
         <img
           src={profileImage}
           alt="Niyonkuru Bertin"
-          className="w-80 h-80 rounded-full mb-6 shadow-md"
+          className="sm:flex hidden w-80 h-80 rounded-full mb-6 shadow-md"
         />
-        <div className="max-w-3xl shadow-lg rounded-2xl p-8 flex flex-col items-center">
+        <div className="max-w-3xl shadow-lg rounded-2xl sm:p-8 p-2 flex flex-col items-center">
           <p className="text-white text-center leading-relaxed">
             I'm a Full Stack Developer specializing in the MERN and PERN stacks.
             I have extensive experience in frontend development using React,

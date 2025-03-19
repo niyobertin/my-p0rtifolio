@@ -52,12 +52,12 @@ const PortfolioSection: React.FC = () => {
   ];
 
   return (
-    <div className="text-white w-full top-20 z-30 relative overflow-auto pt-10">
+    <div
+      className="text-white w-full top-20 z-30 relative overflow-auto pt-20"
+      id="portfolio"
+    >
       <div className="overflow-auto mx-[4%]">
-        <h1
-          className="flex items-center text-white font-bold text-xl justify-center pb-8 pt-8"
-          id="portfolio"
-        >
+        <h1 className="flex items-center text-white font-bold text-xl justify-center pb-8 pt-8">
           PORTFOLIOS
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

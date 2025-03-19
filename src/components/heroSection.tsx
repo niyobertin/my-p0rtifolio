@@ -47,6 +47,7 @@ const HeroSection = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
+      id="home"
     >
       <div className="absolute inset-0 bg-black opacity-70"></div>
 

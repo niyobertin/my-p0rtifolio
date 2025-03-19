@@ -67,7 +67,7 @@ const ServiceSection: React.FC = () => {
     <div
       ref={sectionRef}
       id="service"
-      className="text-white w-full top-20 z-30 relative pt-4"
+      className="text-white w-full top-20 z-30 relative pt-20"
     >
       <h1 className="text-center text-white font-bold text-2xl pb-6">
         SERVICES
